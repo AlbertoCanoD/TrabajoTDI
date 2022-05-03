@@ -3,12 +3,8 @@ import numpy as np
 import cv2 as cv
 from matplotlib import pyplot as plt
 
-#parser = argparse.ArgumentParser(description='Code for Histogram Calculation tutorial.')
-#parser.add_argument('--input', help='Path to input image.', default='lena.jpg')
-#args = parser.parse_args()
-
 print("Introduzca el nombre de la imagen")
-nombre = "a.jpg" #input()
+nombre = "coca.jpg" #input()
 
 img = cv.imread(nombre,0)
 
@@ -17,8 +13,12 @@ if img is None:
     exit(0)
 cv.imshow(nombre, img)
 
-plt.hist(img.ravel(),256, [0,256])
+histr = cv.calcHist([img],[0],None,[256],[0,256])
+plt.plot(histr)
 plt.show()
+
+#plt.hist(img.ravel(),256, [0,256])
+#plt.show()
 
 equ = cv.equalizeHist(img)
 res = np.hstack((img,equ))
