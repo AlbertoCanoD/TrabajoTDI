@@ -3,6 +3,8 @@ import cv2
 import matplotlib.pyplot as plt
 import argparse
 
+#To execute .\ecualizacion.py -i NOMBREIMAGEN
+
 # Argument parser.
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--image", required=True,
