@@ -51,3 +51,6 @@ plt.ylabel("Frecuencia relativa")
 ax4.hist(imageEq.ravel(),256)
 
 plt.show()
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()

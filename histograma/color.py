@@ -38,3 +38,6 @@ for i,col in enumerate(color):
     plt.ylabel("Frecuencia relativa")
     ax2.set_title('Histograma RGB')
 plt.show()
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
