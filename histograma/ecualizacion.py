@@ -11,8 +11,6 @@ ap.add_argument("-i", "--image", required=True,
 	help="Image path or name if in the same folder")
 args = vars(ap.parse_args())
 
-#To execute .\equalizacion.py -i NOMBREIMAGEN
-
 # Read the image and convert to grayscale
 image = cv2.imread(args["image"], cv2.IMREAD_GRAYSCALE)
 

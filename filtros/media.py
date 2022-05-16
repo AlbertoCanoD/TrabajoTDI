@@ -25,24 +25,23 @@ if image is None:
 # Processing kernel size, 
 ksize = args["kernel"]
 
-if ksize < 3 :
-    kernel = (3,3)
-else:
-    kernel = (args["kernel"],args["kernel"])
+if ksize is None:
+    ksize = 3
 
+kernel = (ksize,ksize)
+
+# Apply blur with ksize*ksize 
 blur = cv2.blur(image,kernel)
 
-# Image
+# Original
 plt.subplot(121)
 plt.imshow(image)
 plt.title("Imagen original")
 plt.xticks([]), plt.yticks([])
 
-# Histogram of image
+# Blurred image
 plt.subplot(122)
 plt.imshow(blur)
-if ksize < 3 :
-    plt.title('Filtro media con kernel 3x3')
 plt.title('Filtro media con kernel ' + str(ksize) + 'x' + str(ksize))
 plt.xticks([]), plt.yticks([])
 
