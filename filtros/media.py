@@ -25,7 +25,7 @@ if image is None:
 # Processing kernel size, 
 ksize = args["kernel"]
 
-if ksize is None:
+if ksize is None or ksize < 3:
     ksize = 3
 
 kernel = (ksize,ksize)
