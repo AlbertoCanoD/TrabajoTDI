@@ -26,8 +26,8 @@ if image is None:
 # Processing kernel size,
 ksize = args["kernel"]
 
-if ksize is None or ksize % 2 == 1 or ksize < 3:
-    ksize = 5
+if ksize is None or ksize % 2 != 1 :
+    ksize = 3 
 
 # Apply blur with ksize*ksize
 mediana = cv2.medianBlur(image, ksize)
