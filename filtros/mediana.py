@@ -3,7 +3,7 @@ import cv2
 import matplotlib.pyplot as plt
 import argparse
 
-# To execute .\media.py -i NOMBREIMAGEN -k KERNELSIZE
+# To execute .\mediana.py -i NOMBREIMAGEN -k KERNELSIZE
 
 # Argument parser.
 ap = argparse.ArgumentParser()
@@ -26,13 +26,11 @@ if image is None:
 # Processing kernel size,
 ksize = args["kernel"]
 
-if ksize is None or ksize < 3:
-    ksize = 3
-
-kernel = (ksize, ksize)
+if ksize is None or ksize % 2 == 1 or ksize < 3:
+    ksize = 5
 
 # Apply blur with ksize*ksize
-blur = cv2.blur(image, kernel)
+mediana = cv2.medianBlur(image, ksize)
 
 # Original
 plt.subplot(121)
@@ -42,7 +40,7 @@ plt.xticks([]), plt.yticks([])
 
 # Blurred image
 plt.subplot(122)
-plt.imshow(blur)
+plt.imshow(mediana)
 plt.title('Filtro media con kernel ' + str(ksize) + 'x' + str(ksize))
 plt.xticks([]), plt.yticks([])
 
