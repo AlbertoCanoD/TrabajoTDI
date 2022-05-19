@@ -3,7 +3,7 @@ import cv2
 import matplotlib.pyplot as plt
 import argparse
 
-# To execute .\mediana.py -i NOMBREIMAGEN -k KERNELSIZE
+# To execute .\mediana.py -i IMAGEPATH -k KERNELSIZE
 
 # Argument parser.
 ap = argparse.ArgumentParser()
@@ -26,8 +26,8 @@ if image is None:
 # Processing kernel size,
 ksize = args["kernel"]
 
-if ksize is None or ksize % 2 != 1 :
-    ksize = 3 
+if ksize is None or ksize % 2 != 1:
+    ksize = 3
 
 # Apply blur with ksize*ksize
 mediana = cv2.medianBlur(image, ksize)

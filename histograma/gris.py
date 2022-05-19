@@ -3,7 +3,7 @@ import cv2
 import matplotlib.pyplot as plt
 import argparse
 
-# To execute .\gris.py -i NOMBREIMAGEN
+# To execute .\gris.py -i IMAGEPATH
 
 # Argument parser.
 ap = argparse.ArgumentParser()

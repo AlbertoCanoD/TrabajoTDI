@@ -3,7 +3,7 @@ import cv2
 import matplotlib.pyplot as plt
 import argparse
 
-# To execute .\media.py -i NOMBREIMAGEN -k KERNELSIZE
+# To execute .\media.py -i IMAGEPATH -k KERNELSIZE
 
 # Argument parser.
 ap = argparse.ArgumentParser()

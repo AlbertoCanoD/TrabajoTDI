@@ -3,7 +3,7 @@ import cv2
 import matplotlib.pyplot as plt
 import argparse
 
-# To execute .\color.py -i NOMBREIMAGEN
+# To execute .\color.py -i IMAGEPATH
 
 # Argument parser.
 ap = argparse.ArgumentParser()
@@ -34,7 +34,7 @@ for i, col in enumerate(color):
     histr = cv2.calcHist([image], [i], None, [256], [0, 256])
     plt.plot(histr, color=col)
     plt.xlim([0, 256])
-    plt.xlabel("Niveles de gris")
+    plt.xlabel("Niveles de color")
     plt.ylabel("Frecuencia relativa")
     ax2.set_title('Histograma RGB')
 plt.show()

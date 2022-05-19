@@ -3,7 +3,7 @@ import cv2
 import matplotlib.pyplot as plt
 import argparse
 
-# To execute .\ecualizacion.py -i NOMBREIMAGEN
+# To execute .\ecualizacion.py -i IMAGEPATH
 
 # Argument parser.
 ap = argparse.ArgumentParser()
