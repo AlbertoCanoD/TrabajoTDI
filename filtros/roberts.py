@@ -28,8 +28,6 @@ gy = np.array([[0, 1], [-1, 0]])
 roberty = cv2.filter2D(image, -1, gy)
 
 # X & Y axis Roberts mask
-gx = np.array([[1, 0], [0, -1]])
-gy = np.array([[0, 1], [-1, 0]])
 imagex = cv2.filter2D(image, -1, gx)
 imagey = cv2.filter2D(image, -1, gy)
 robertxy = cv2.addWeighted(imagex, 0.5, imagey, 0.5, 0)
