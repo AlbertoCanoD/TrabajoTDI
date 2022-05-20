@@ -1,4 +1,3 @@
-from re import X
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
@@ -10,71 +9,53 @@ import argparse
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--image", required=True,
                 help="Image path or name if in the same folder")
-
-ap.add_argument("-a", "--axis", required=False,
-                help="1 for the horizontal axis, 2 for the vertical axis, none for X & Y")
-
-
 args = vars(ap.parse_args())
 
 # Read the image and convert to grayscale
-image = cv2.imread(args["image"])
-image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+image = cv2.imread(args["image"], 1)
 
 # Check if not exist
 if image is None:
     print("Image not found")
     exit(0)
 
-axisarg = args["axis"]
+# X axis Roberts mask
+gx = np.array([[1, 0], [0, -1]])
+robertx = cv2.filter2D(image, -1, gx)
 
-def axis(axisarg):
-    if axisarg == 1:
-        gx = np.array([[1, 0], [0, -1]])
-        robert = cv2.filter2D(image, -1, gx)
-        return robert
+# Y axis Roberts mask
+gy = np.array([[0, 1], [-1, 0]])
+roberty = cv2.filter2D(image, -1, gy)
 
-    elif axisarg == 2:
-        gy = np.array([[0, 1], [-1, 0]])
-        robert = cv2.filter2D(image, -1, gy)
-        return robert
-
-    else:
-        gx = np.array([[1, 0], [0, -1]])
-        gy = np.array([[0, 1], [-1, 0]])
-        imagex = cv2.filter2D(image, -1, gx)
-        imagey = cv2.filter2D(image, -1, gy)
-        robert = cv2.addWeighted(imagex, 0.5, imagey, 0.5, 0)
-        return robert
-
-robert = axis('axisarg')
-'''
-# Mask Gx
-gx = np.array([[1, 0],
-              [0, -1]])
-
-# Mask Gy
-gy = np.array([[0, 1],
-              [-1, 0]])
-
-# Apply filter to image
+# X & Y axis Roberts mask
+gx = np.array([[1, 0], [0, -1]])
+gy = np.array([[0, 1], [-1, 0]])
 imagex = cv2.filter2D(image, -1, gx)
 imagey = cv2.filter2D(image, -1, gy)
-
-# Calculate gradient
-grad = cv2.addWeighted(imagex, 0.5, imagey, 0.5, 0)'''
-
+robertxy = cv2.addWeighted(imagex, 0.5, imagey, 0.5, 0)
 
 # Original
-plt.subplot(121)
+plt.subplot(2,2,1)
 plt.imshow(image)
 plt.title("Imagen original")
 plt.xticks([]), plt.yticks([])
 
-# Filtered image
-plt.subplot(122)
-plt.imshow(robert)
-plt.title('Filtro realce Roberts')
+# Roberts mask X axis
+plt.subplot(2,2,2)
+plt.imshow(robertx)
+plt.title('Filtro realce Roberts eje X')
+plt.xticks([]), plt.yticks([])
+
+# Roberts mask Y axis
+plt.subplot(2,2,3)
+plt.imshow(roberty)
+plt.title('Filtro realce Roberts eje Y')
+plt.xticks([]), plt.yticks([])
+
+# Roberts mask X & Y axis
+plt.subplot(2,2,4)
+plt.imshow(robertxy)
+plt.title('Filtro realce Roberts eje X e Y')
 plt.xticks([]), plt.yticks([])
 
 plt.show()

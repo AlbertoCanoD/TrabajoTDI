@@ -28,11 +28,11 @@ if image is None:
 
 axisarg = args["axis"]
 
-if axisarg is 1:
+if axisarg == "X":
     gx = np.array([[1, 0], [0, -1]])
     robert = cv2.filter2D(image, -1, gx)
 
-elif axisarg == 2:
+elif axisarg == "Y":
     gy = np.array([[0, 1], [-1, 0]])
     robert = cv2.filter2D(image, -1, gy)
 
