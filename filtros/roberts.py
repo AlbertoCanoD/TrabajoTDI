@@ -35,25 +35,25 @@ imagey = cv2.filter2D(image, -1, gy)
 robertxy = cv2.addWeighted(imagex, 0.5, imagey, 0.5, 0)
 
 # Original
-plt.subplot(2,2,1)
+plt.subplot(2, 2, 1)
 plt.imshow(image)
 plt.title("Imagen original")
 plt.xticks([]), plt.yticks([])
 
 # Roberts mask X axis
-plt.subplot(2,2,2)
+plt.subplot(2, 2, 2)
 plt.imshow(robertx)
 plt.title('Filtro realce Roberts eje X')
 plt.xticks([]), plt.yticks([])
 
 # Roberts mask Y axis
-plt.subplot(2,2,3)
+plt.subplot(2, 2, 3)
 plt.imshow(roberty)
 plt.title('Filtro realce Roberts eje Y')
 plt.xticks([]), plt.yticks([])
 
 # Roberts mask X & Y axis
-plt.subplot(2,2,4)
+plt.subplot(2, 2, 4)
 plt.imshow(robertxy)
 plt.title('Filtro realce Roberts eje X e Y')
 plt.xticks([]), plt.yticks([])
