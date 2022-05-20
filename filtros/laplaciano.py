@@ -23,11 +23,8 @@ if image is None:
 # Remove noise with gaussian blur
 image = cv2.GaussianBlur(image, (3, 3), 0)
 
-# Kernel size
-ksize = 3
-
 # Apply the laplacian mask
-aux = cv2.Laplacian(image, cv2.CV_16S, ksize)
+aux = cv2.Laplacian(image, cv2.CV_16S, ksize=3)
 Laplaciano = cv2.convertScaleAbs(aux)
 
 # Original
@@ -39,7 +36,7 @@ plt.xticks([]), plt.yticks([])
 # Blurred image
 plt.subplot(122)
 plt.imshow(Laplaciano)
-plt.title('Másca Laplaciano')
+plt.title('Laplaciano')
 plt.xticks([]), plt.yticks([])
 
 plt.show()

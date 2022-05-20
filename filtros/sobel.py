@@ -22,18 +22,15 @@ if image is None:
 # Remove noise with gaussian blur
 image = cv2.GaussianBlur(image, (3, 3), 0)
 
-# Kernel size
-ksize = 5
-
 # Convolute kernel = 5x5
-sobelx = cv2.Sobel(image, cv2.CV_16S, 1, 0, ksize)  # x
-sobely = cv2.Sobel(image, cv2.CV_16S, 0, 1, ksize)  # y
+sobelx = cv2.Sobel(image, cv2.CV_16S, 1, 0, ksize=5)
+sobely = cv2.Sobel(image, cv2.CV_16S, 0, 1, ksize=5)
 
 # Convert to uint8
 abssobelx = cv2.convertScaleAbs(sobelx)
 abssobely = cv2.convertScaleAbs(sobely)
 
-# Gradient X &
+# Gradient X & Y
 grad = cv2.addWeighted(abssobelx, 0.5, abssobely, 0.5, 0)
 
 # Original
