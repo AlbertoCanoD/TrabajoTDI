@@ -3,7 +3,7 @@ import cv2
 import matplotlib.pyplot as plt
 import argparse
 
-# To execute .\media.py -i IMAGEPATH -k KERNELSIZE
+# To execute .\canny.py -i IMAGEPATH -m (INT) -M (INT)
 
 # Argument parser.
 ap = argparse.ArgumentParser()
@@ -45,6 +45,10 @@ if maxthreshold < 1:
 if maxthreshold > 255:
     maxthreshold = 120
 
+# More blur
+image = cv2.GaussianBlur(image, (3, 3), 0)
+
+# Canny algorithm
 canny = cv2.Canny(image, minthreshold, maxthreshold)
 
 # Original

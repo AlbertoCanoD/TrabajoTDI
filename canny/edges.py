@@ -54,7 +54,7 @@ aux = cv2.Laplacian(image, cv2.CV_16S, ksize=3)
 Laplaciano = cv2.convertScaleAbs(aux)
 
 
-#Canny
+# Canny
 minthreshold = 150
 maxthreshold = 230
 canny = cv2.Canny(image, minthreshold, maxthreshold)
