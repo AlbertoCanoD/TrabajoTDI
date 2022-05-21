@@ -3,7 +3,7 @@ import cv2
 import matplotlib.pyplot as plt
 import argparse
 
-# To execute .\adaptativo.py -i IMAGEPATH -t THRESHOLD -n NEIGHBOURHOOD
+# To execute .\otsu.py -i1 IMAGEPATH -i2 IMAGEPATH
 
 # Argument parser.
 ap = argparse.ArgumentParser()
@@ -13,16 +13,10 @@ ap.add_argument("-i1", "--image1", required=True,
 ap.add_argument("-i2", "--image2", required=True,
                 help="Image path or name if in the same folder")
 
-
-'''ap.add_argument("-t", "--threshold", type=int, help="Threshold value")
-
-ap.add_argument("-n", "--neighbourhood", type=int,
-                help="Size of neighbourhood area")'''
-
 args = vars(ap.parse_args())
 
 # Read the image1
-image1 = cv2.imread(args["image"], 0)
+image1 = cv2.imread(args["image1"], 0)
 
 # Check if not exist
 if image1 is None:
@@ -30,52 +24,40 @@ if image1 is None:
     exit(0)
 
 # Read the image2
-image1 = cv2.imread(args["image"], 0)
+image2 = cv2.imread(args["image2"], 0)
 
 # Check if not exist
-if image1 is None:
+if image2 is None:
     print("Image not found")
     exit(0)
 
-threshold = args["threshold"]
+ret1, otsu1 = cv2.threshold(image1, 0, 255,
+                            cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+ret2, otsu2 = cv2.threshold(image2, 0, 255,
+                            cv2.THRESH_BINARY+cv2.THRESH_OTSU)
 
-if threshold is None or threshold < 0 or threshold > 255:
-    threshold = 127
-
-neighbourhood = args["neighbourhood"]
-
-if neighbourhood is None or neighbourhood < 0 or neighbourhood > 55 or neighbourhood % 2 != 1:
-    print("Neighbourhood size cannot be prime number, neighbourhood = 11")
-    neighbourhood = 11
-
-ret, bin = cv2.threshold(image, threshold, 255, cv2.THRESH_BINARY)
-mean = cv2.adaptiveThreshold(image, 255, cv2.ADAPTIVE_THRESH_MEAN_C,
-                             cv2.THRESH_BINARY, neighbourhood, 2)
-gaussian = cv2.adaptiveThreshold(image, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
-                                 cv2.THRESH_BINARY, neighbourhood, 2)
-
-# Original
+# Image 1
 plt.subplot(2, 2, 1)
-plt.imshow(image,  'gray')
-plt.title("Imagen original")
+plt.imshow(image1,  'gray')
+plt.title("Imagen 1")
 plt.xticks([]), plt.yticks([])
 
-# THRESH_BINARY
+# THRESH_OTSU image 1
 plt.subplot(2, 2, 2)
-plt.imshow(bin,  'gray')
-plt.title('THRESH_BINARY')
+plt.imshow(otsu1,  'gray')
+plt.title('THRESH_OTSU T=' + str(int(ret1)))
 plt.xticks([]), plt.yticks([])
 
-# THRESH_BINARY_INV
+# Image 2
 plt.subplot(2, 2, 3)
-plt.imshow(mean, 'gray')
-plt.title('ADAPTIVE_THRESH_MEAN_C')
+plt.imshow(image2, 'gray')
+plt.title('Imagen 2')
 plt.xticks([]), plt.yticks([])
 
-# THRESH_TRUNC
+# # THRESH_OTSU image 2
 plt.subplot(2, 2, 4)
-plt.imshow(gaussian, 'gray')
-plt.title('ADAPTIVE_THRESH_GAUSSIAN_C')
+plt.imshow(otsu2, 'gray')
+plt.title('THRESH_OTSU T=' + str(int(ret2)))
 plt.xticks([]), plt.yticks([])
 
 plt.show()
