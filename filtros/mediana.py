@@ -27,6 +27,7 @@ if image is None:
 ksize = args["kernel"]
 
 if ksize is None or ksize % 2 != 1:
+    print("Kernel size cannot be prime number, ksize = 3")
     ksize = 3
 
 # Apply blur with ksize*ksize

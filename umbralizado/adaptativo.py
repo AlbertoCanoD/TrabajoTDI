@@ -10,7 +10,10 @@ ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--image", required=True,
                 help="Image path or name if in the same folder")
 
-ap.add_argument("-t", "--threshold", help="Threshold value")
+ap.add_argument("-t", "--threshold", type=int, help="Threshold value")
+
+ap.add_argument("-n", "--neighbourhood", type=int,
+                help="Size of neighbourhood area")
 
 args = vars(ap.parse_args())
 
@@ -27,50 +30,40 @@ threshold = args["threshold"]
 if threshold is None or threshold < 0 or threshold > 255:
     threshold = 127
 
-# Convert to RGB colors
-#image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+neighbourhood = args["neighbourhood"]
 
-# Types of thresholding
+if neighbourhood is None or neighbourhood < 0 or neighbourhood > 55 or neighbourhood % 2 != 1:
+    print("Neighbourhood size cannot be prime number, neighbourhood = 11")
+    neighbourhood = 11
+
 ret, bin = cv2.threshold(image, threshold, 255, cv2.THRESH_BINARY)
-ret, binInv = cv2.threshold(image, threshold, 255, cv2.THRESH_BINARY_INV)
-ret, trunc = cv2.threshold(image, threshold, 255, cv2.THRESH_TRUNC)
-ret, tozero = cv2.threshold(image, threshold, 255, cv2.THRESH_TOZERO)
-ret, tozeroInv = cv2.threshold(image, threshold, 255, cv2.THRESH_TOZERO_INV)
+mean = cv2.adaptiveThreshold(image, 255, cv2.ADAPTIVE_THRESH_MEAN_C,
+                             cv2.THRESH_BINARY, neighbourhood, 2)
+gaussian = cv2.adaptiveThreshold(image, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
+                                 cv2.THRESH_BINARY, neighbourhood, 2)
 
 # Original
-plt.subplot(2, 3, 1)
-plt.imshow(image, 'gray')
+plt.subplot(2, 2, 1)
+plt.imshow(image,  'gray')
 plt.title("Imagen original")
 plt.xticks([]), plt.yticks([])
 
 # THRESH_BINARY
-plt.subplot(2, 3, 2)
-plt.imshow(bin, 'gray')
+plt.subplot(2, 2, 2)
+plt.imshow(bin,  'gray')
 plt.title('THRESH_BINARY')
 plt.xticks([]), plt.yticks([])
 
 # THRESH_BINARY_INV
-plt.subplot(2, 3, 3)
-plt.imshow(binInv, 'gray')
-plt.title('THRESH_BINARY_INV')
+plt.subplot(2, 2, 3)
+plt.imshow(mean, 'gray')
+plt.title('ADAPTIVE_THRESH_MEAN_C')
 plt.xticks([]), plt.yticks([])
 
 # THRESH_TRUNC
-plt.subplot(2, 3, 4)
-plt.imshow(trunc, 'gray')
-plt.title('THRESH_TRUNC')
-plt.xticks([]), plt.yticks([])
-
-# THRESH_TOZERO
-plt.subplot(2, 3, 5)
-plt.imshow(tozero, 'gray')
-plt.title('THRESH_TOZERO')
-plt.xticks([]), plt.yticks([])
-
-# THRESH_TOZERO_INV
-plt.subplot(2, 3, 6)
-plt.imshow(tozeroInv, 'gray')
-plt.title('THRESH_TOZERO_INV')
+plt.subplot(2, 2, 4)
+plt.imshow(gaussian, 'gray')
+plt.title('ADAPTIVE_THRESH_GAUSSIAN_C')
 plt.xticks([]), plt.yticks([])
 
 plt.show()
