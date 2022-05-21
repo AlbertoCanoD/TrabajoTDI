@@ -19,6 +19,9 @@ if image is None:
     print("Image not found")
     exit(0)
 
+# Convert to RGB colors
+image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
 fig, ax = plt.subplots(1, 1, figsize=(10, 10))
 ax1 = plt.subplot(221)
 ax2 = plt.subplot(223)

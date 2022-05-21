@@ -19,6 +19,9 @@ if image is None:
     print("Image not found")
     exit(0)
 
+# Convert to RGB colors
+image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
 # X axis Roberts mask
 gx = np.array([[1, 0], [0, -1]])
 robertx = cv2.filter2D(image, -1, gx)

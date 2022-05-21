@@ -19,12 +19,12 @@ if image is None:
     print("Image not found")
     exit(0)
 
-# Remove noise with gaussian blur
-image = cv2.GaussianBlur(image, (3, 3), 0)
+# Convert to RGB colors
+image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 # Convolute kernel = 5x5
-sobelx = cv2.Sobel(image, cv2.CV_16S, 1, 0, ksize=5)
-sobely = cv2.Sobel(image, cv2.CV_16S, 0, 1, ksize=5)
+sobelx = cv2.Sobel(image, cv2.CV_16S, 1, 0, ksize=3)
+sobely = cv2.Sobel(image, cv2.CV_16S, 0, 1, ksize=3)
 
 # Convert to uint8
 abssobelx = cv2.convertScaleAbs(sobelx)

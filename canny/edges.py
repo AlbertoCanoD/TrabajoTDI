@@ -53,6 +53,13 @@ prewittxy = cv2.addWeighted(prewittx, 0.5, prewitty, 0.5, 0)
 aux = cv2.Laplacian(image, cv2.CV_16S, ksize=3)
 Laplaciano = cv2.convertScaleAbs(aux)
 
+
+#Canny
+minthreshold = 150
+maxthreshold = 230
+canny = cv2.Canny(image, minthreshold, maxthreshold)
+
+
 # Original
 plt.subplot(2, 3, 1)
 plt.imshow(image, cmap='gray')
@@ -81,6 +88,12 @@ plt.xticks([]), plt.yticks([])
 plt.subplot(2, 3, 5)
 plt.imshow(Laplaciano, cmap='gray')
 plt.title('Laplaciano')
+plt.xticks([]), plt.yticks([])
+
+# Canny
+plt.subplot(2, 3, 6)
+plt.imshow(canny, cmap='gray')
+plt.title('Canny')
 plt.xticks([]), plt.yticks([])
 
 plt.show()

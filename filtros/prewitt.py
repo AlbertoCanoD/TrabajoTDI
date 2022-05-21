@@ -19,6 +19,9 @@ if image is None:
     print("Image not found")
     exit(0)
 
+# Convert to RGB colors
+image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
 # Remove noise with gaussian blur
 image = cv2.GaussianBlur(image, (3, 3), 0)
 
