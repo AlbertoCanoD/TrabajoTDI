@@ -11,7 +11,7 @@ ap.add_argument("-i", "--image", required=True,
                 help="Image path or name if in the same folder")
 args = vars(ap.parse_args())
 
-# Read the image and convert to grayscale
+# Read the image
 image = cv2.imread(args["image"], 1)
 
 # Check if not exist

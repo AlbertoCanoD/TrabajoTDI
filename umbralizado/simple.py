@@ -14,7 +14,7 @@ ap.add_argument("-t", "--threshold", help="Threshold value")
 
 args = vars(ap.parse_args())
 
-# Read the image and convert to grayscale
+# Read the image
 image = cv2.imread(args["image"], 0)
 
 # Check if not exist

@@ -14,7 +14,7 @@ ap.add_argument("-k", "--kernel", type=int, help="Kernel size, > 3")
 
 args = vars(ap.parse_args())
 
-# Read the image and convert to grayscale
+# Read the image
 image = cv2.imread(args["image"])
 image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 

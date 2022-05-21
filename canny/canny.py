@@ -18,7 +18,7 @@ ap.add_argument("-M", "--maxthreshold", required=True, type=int,
 
 args = vars(ap.parse_args())
 
-# Read the image and convert to grayscale
+# Read the image
 image = cv2.imread(args["image"])
 image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 

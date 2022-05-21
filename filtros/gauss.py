@@ -16,7 +16,7 @@ ap.add_argument("-s", "--sigma", type=float, help="Sigma value")
 
 args = vars(ap.parse_args())
 
-# Read the image and convert to grayscale
+# Read the image
 image = cv2.imread(args["image"])
 image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 

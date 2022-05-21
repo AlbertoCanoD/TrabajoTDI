@@ -7,21 +7,33 @@ import argparse
 
 # Argument parser.
 ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", required=True,
+ap.add_argument("-i1", "--image1", required=True,
                 help="Image path or name if in the same folder")
 
-ap.add_argument("-t", "--threshold", type=int, help="Threshold value")
+ap.add_argument("-i2", "--image2", required=True,
+                help="Image path or name if in the same folder")
+
+
+'''ap.add_argument("-t", "--threshold", type=int, help="Threshold value")
 
 ap.add_argument("-n", "--neighbourhood", type=int,
-                help="Size of neighbourhood area")
+                help="Size of neighbourhood area")'''
 
 args = vars(ap.parse_args())
 
-# Read the image
-image = cv2.imread(args["image"], 0)
+# Read the image1
+image1 = cv2.imread(args["image"], 0)
 
 # Check if not exist
-if image is None:
+if image1 is None:
+    print("Image not found")
+    exit(0)
+
+# Read the image2
+image1 = cv2.imread(args["image"], 0)
+
+# Check if not exist
+if image1 is None:
     print("Image not found")
     exit(0)
 
