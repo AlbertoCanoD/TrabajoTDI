@@ -3,7 +3,7 @@ import cv2
 import matplotlib.pyplot as plt
 import argparse
 
-# To execute .\canny.py -i IMAGEPATH -m (INT) -M (INT)
+# To execute .\canny.py -i IMAGEPATH -m minthreshold -M maxthreshold
 
 # Argument parser.
 ap = argparse.ArgumentParser()
