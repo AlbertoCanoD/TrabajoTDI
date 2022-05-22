@@ -27,9 +27,6 @@ threshold = args["threshold"]
 if threshold is None or threshold < 0 or threshold > 255:
     threshold = 127
 
-# Convert to RGB colors
-#image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-
 # Types of thresholding
 ret, bin = cv2.threshold(image, threshold, 255, cv2.THRESH_BINARY)
 ret, binInv = cv2.threshold(image, threshold, 255, cv2.THRESH_BINARY_INV)
