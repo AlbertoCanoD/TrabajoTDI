@@ -8,4 +8,4 @@
 
 <br><br>*Project documentation in Spanish*
 
-![Image Title](./Procesamiento de imágenes digitales con OpenCV y Python.pdf){width=65%}
+[Procesamiento de imágenes digitales con OpenCV y Python](https://github.com/AlbertoCanoD/TrabajoTDI/blob/main/Procesamiento%20de%20im%C3%A1genes%20digitales%20con%20OpenCV%20y%20Python.pdf)
